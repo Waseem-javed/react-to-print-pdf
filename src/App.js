@@ -1,25 +1,31 @@
-import logo from './logo.svg';
+import React from "react";
+import ReactToPrint from "react-to-print";
+
+import  ComponentToPrint  from "./components/ComponentToPrint";
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.PureComponent {
+   styleOverrides = {
+    boxShadow: "0px 0px 0px 0px #000000"
+  };
+
+  render() {
+    return (
+      <div className="container">
+        {/* 1st library => uncommment below code the reacttoprint library , ComponentToPrint */}
+
+        <ReactToPrint
+          className="pull-right"
+          pageStyle={this.styleOverrides}
+          trigger={() => (
+            <button className="btn btn-primary">Print this out!</button>
+          )}
+          content={() => this.componentRef}
+        />
+         <ComponentToPrint ref={(el) => (this.componentRef = el)} />
+      </div>
+    );
+  }
 }
 
 export default App;
